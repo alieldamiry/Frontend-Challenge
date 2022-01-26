@@ -10,8 +10,18 @@ import {
 } from "@mui/material";
 import Edit from "../Edit";
 import Delete from "../Delete";
+import { useAppDispatch, useAppSelector } from "src/redux/hooks";
+import { useEffect } from "react";
+import { fetchAdds } from "src/redux/slices/adsSlice";
 
 const AdsList = () => {
+  const dispatch = useAppDispatch();
+  const { adsList } = useAppSelector((state) => state.ads);
+
+  useEffect(() => {
+    dispatch(fetchAdds());
+  }, []);
+
   return (
     <Box sx={{ p: 3 }}>
       <TableContainer
@@ -30,24 +40,26 @@ const AdsList = () => {
             </TableRow>
           </TableHead>
           <TableBody>
-            <TableRow
-              sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
-            >
-              <TableCell component="th" scope="row">
-                Video
-              </TableCell>
-              <TableCell component="th" scope="row">
-                <a href={"http://www.exit109.com/~dnn/clips/RW20seconds_1.mp4"}>
-                  http://www.exit109.com/~dnn/clips/RW20seconds_1.mp4
-                </a>
-              </TableCell>
-              <TableCell>12/05/2021 06:25:00 PM</TableCell>
-              <TableCell>12/05/2021 06:27:00 PM</TableCell>
-              <TableCell>
-                <Edit />
-                <Delete />
-              </TableCell>
-            </TableRow>
+            {adsList?.map((ad: any) => (
+              <TableRow
+                sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+              >
+                <TableCell component="th" scope="row">
+                  {ad.image ? "Image" : "Video"}
+                </TableCell>
+                <TableCell component="th" scope="row">
+                  <a href={ad.image || ad.video}>{ad.image || ad.video}</a>
+                </TableCell>
+                <TableCell>{ad.from_time}</TableCell>
+                <TableCell>{ad.to_time}</TableCell>
+                <TableCell>
+                  <Box sx={{ display: "flex" }}>
+                    <Edit />
+                    <Delete />
+                  </Box>
+                </TableCell>
+              </TableRow>
+            ))}
           </TableBody>
         </Table>
         <Box
