@@ -7,12 +7,9 @@ import {
   TableRow,
   TableCell,
   TableBody,
-  Tooltip,
-  IconButton,
 } from "@mui/material";
-import EditOutlinedIcon from "@mui/icons-material/EditOutlined";
-import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
 import Edit from "../Edit";
+import Delete from "../Delete";
 
 const AdsList = () => {
   return (
@@ -48,11 +45,7 @@ const AdsList = () => {
               <TableCell>12/05/2021 06:27:00 PM</TableCell>
               <TableCell>
                 <Edit />
-                <Tooltip title="Delete" placement="top" arrow>
-                  <IconButton color="error">
-                    <DeleteOutlineIcon />
-                  </IconButton>
-                </Tooltip>
+                <Delete />
               </TableCell>
             </TableRow>
           </TableBody>
