@@ -1,4 +1,5 @@
-import { Box, Button, Typography } from "@mui/material";
+import { Box, Typography } from "@mui/material";
+import Create from "./Create";
 import AdsList from "./List";
 
 const Ads = () => {
@@ -17,9 +18,9 @@ const Ads = () => {
         }}
       >
         <Typography component="h2" variant="h5" sx={{ fontWeight: "bold" }}>
-          {"Ads"}
+          Ads
         </Typography>
-        <Button variant="contained">Create</Button>
+        <Create />
       </Box>
       <AdsList />
     </>
