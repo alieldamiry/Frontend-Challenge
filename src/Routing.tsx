@@ -1,7 +1,7 @@
 import { useRoutes } from "react-router";
+import SignIn from "./pages/SignIn";
 
 const Routing = () => {
-
   const routes = useRoutes([
     {
       path: "/dashboard",
@@ -14,7 +14,7 @@ const Routing = () => {
     },
     {
       path: "login",
-      element:  <div>sign in page</div>,
+      element: <SignIn />,
     },
     {
       path: "*",
