@@ -12,6 +12,7 @@ import {
 } from "@mui/material";
 import EditOutlinedIcon from "@mui/icons-material/EditOutlined";
 import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
+import Edit from "../Edit";
 
 const AdsList = () => {
   return (
@@ -46,11 +47,7 @@ const AdsList = () => {
               <TableCell>12/05/2021 06:25:00 PM</TableCell>
               <TableCell>12/05/2021 06:27:00 PM</TableCell>
               <TableCell>
-                <Tooltip title="Edit" placement="top" arrow>
-                  <IconButton>
-                    <EditOutlinedIcon />
-                  </IconButton>
-                </Tooltip>
+                <Edit />
                 <Tooltip title="Delete" placement="top" arrow>
                   <IconButton color="error">
                     <DeleteOutlineIcon />
