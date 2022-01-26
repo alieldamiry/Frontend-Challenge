@@ -12,6 +12,7 @@ import { useNavigate } from "react-router-dom";
 
 const SignIn = () => {
   const navigate = useNavigate();
+
   const initialValues = {
     email: "",
     password: "",
@@ -29,6 +30,7 @@ const SignIn = () => {
 
   const submitFunction = (data: any) => {
     console.log(data);
+    navigate("/dashboard/ads");
   };
 
   return (
