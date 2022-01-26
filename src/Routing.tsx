@@ -5,7 +5,6 @@ import Ads from "./modules/ads";
 import Layout from "./Layout";
 
 const Routing = () => {
-    
   // dummy variable for protected routes
   const isAuth = true;
 
@@ -21,7 +20,7 @@ const Routing = () => {
       ],
     },
     {
-      path: "login",
+      path: "/",
       element: <SignIn />,
     },
     {
