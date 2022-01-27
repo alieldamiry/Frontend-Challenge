@@ -42,6 +42,7 @@ const AdsList = () => {
           <TableBody>
             {adsList?.map((ad: any) => (
               <TableRow
+                key={ad.from_time}
                 sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
               >
                 <TableCell component="th" scope="row">

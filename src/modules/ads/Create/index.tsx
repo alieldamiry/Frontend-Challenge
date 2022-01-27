@@ -1,11 +1,15 @@
 import { Box, Button, Grid, Modal, Typography } from "@mui/material";
 import { Form, Formik } from "formik";
 import { useState } from "react";
+import { toast } from "react-toastify";
 import FormikControl from "src/components/formik/FormikControl";
+import { useAppDispatch } from "src/redux/hooks";
+import { createAd } from "src/redux/slices/adsSlice";
 import * as Yup from "yup";
 
 const Create = () => {
   const [open, setOpen] = useState(false);
+  const dispatch = useAppDispatch();
 
   const initialValues = {
     type: "",
@@ -21,7 +25,11 @@ const Create = () => {
     to_time: Yup.string().required("Required Field"),
   });
 
-  const submitFunction = (data: any) => {};
+  const submitFunction = (data: any) => {
+    dispatch(createAd(data));
+    setOpen(false);
+    toast.success("Ad Created Successfully")
+  };
 
   return (
     <>
