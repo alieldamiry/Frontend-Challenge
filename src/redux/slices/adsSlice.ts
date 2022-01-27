@@ -29,6 +29,7 @@ export const adSlice = createSlice({
     createAd: (state, action) => {
       const { to_time, from_time, type, link } = action.payload;
       const newAd = {
+        id: new Date().getTime(),
         image: type === "image" ? link : "",
         video: type === "video" ? link : "",
         from_time: new Date(from_time).toLocaleString(),
@@ -41,7 +42,12 @@ export const adSlice = createSlice({
     builder
       .addCase(fetchAdds.fulfilled, (state, action) => {
         state.status = "idle";
-        state.adsList = action.payload;
+        const updatedAdsList = action.payload.map((ad: any, index: number) => ({
+          id: new Date().getTime() + index,
+          ...ad,
+        }));
+
+        state.adsList = updatedAdsList;
       })
       .addCase(fetchAdds.pending, (state) => {
         state.status = "loading";
