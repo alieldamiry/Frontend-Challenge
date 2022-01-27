@@ -1,5 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
+import { idText } from "typescript";
 
 export const fetchAdds = createAsyncThunk("/fetchAdds", async () => {
   const response = await axios.get("/data.json");
@@ -10,6 +11,7 @@ interface stateInterface {
   status: "idle" | "error" | "loading";
   error: any;
   adsList: {
+    id: number;
     image: string;
     video: string;
     from_time: string;
@@ -37,6 +39,17 @@ export const adSlice = createSlice({
       };
       state.adsList.push(newAd);
     },
+    editAd: (state, action) => {
+      const { to_time, from_time, type, link, id } = action.payload;
+      state.adsList.forEach((ad) => {
+        if (ad.id === id) {
+          ad.image = type === "image" ? link : "";
+          ad.video = type === "video" ? link : "";
+          ad.from_time = new Date(from_time).toLocaleString();
+          ad.to_time = new Date(to_time).toLocaleString();
+        }
+      });
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -59,6 +72,6 @@ export const adSlice = createSlice({
   },
 });
 
-export const { createAd } = adSlice.actions;
+export const { createAd, editAd } = adSlice.actions;
 
 export default adSlice.reducer;

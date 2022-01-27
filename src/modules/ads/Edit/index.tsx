@@ -12,15 +12,21 @@ import { Form, Formik } from "formik";
 import { useState } from "react";
 import FormikControl from "src/components/formik/FormikControl";
 import * as Yup from "yup";
+import { useAppDispatch } from "src/redux/hooks";
+import { editAd } from "src/redux/slices/adsSlice";
 
-const Edit = () => {
+interface propTypes {
+  adData: any;
+}
+const Edit = ({ adData }: propTypes) => {
   const [open, setOpen] = useState(false);
+  const dispatch = useAppDispatch();
 
   const initialValues = {
-    type: "",
-    link: "",
-    from_time: "",
-    to_time: "",
+    type: adData.image ? "image" : "video",
+    link: adData.image || adData.video,
+    from_time: new Date(adData.from_time).toISOString().split("T")[0],
+    to_time: new Date(adData.to_time).toISOString().split("T")[0],
   };
 
   const validationSchema = Yup.object({
@@ -30,7 +36,10 @@ const Edit = () => {
     to_time: Yup.string().required("Required Field"),
   });
 
-  const submitFunction = (data: any) => {};
+  const submitFunction = (data: any) => {
+    setOpen(false);
+    dispatch(editAd({ id: adData.id, ...data }));
+  };
 
   return (
     <>
