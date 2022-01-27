@@ -6,7 +6,7 @@ export const fetchAdds = createAsyncThunk("/fetchAdds", async () => {
   return response.data;
 });
 
-interface stateInterface {
+export interface stateInterface {
   status: "idle" | "error" | "loading";
   error: any;
   adsList: {
@@ -17,6 +17,7 @@ interface stateInterface {
     to_time: string;
   }[];
 }
+
 const initialState: stateInterface = {
   status: "idle",
   error: null,
