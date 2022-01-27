@@ -1,6 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
-import { idText } from "typescript";
 
 export const fetchAdds = createAsyncThunk("/fetchAdds", async () => {
   const response = await axios.get("/data.json");
@@ -50,6 +49,11 @@ export const adSlice = createSlice({
         }
       });
     },
+    deleteAd: (state, action) => {
+      state.adsList = state.adsList.filter(
+        (ad: any) => ad.id !== action.payload
+      );
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -72,6 +76,6 @@ export const adSlice = createSlice({
   },
 });
 
-export const { createAd, editAd } = adSlice.actions;
+export const { createAd, editAd, deleteAd } = adSlice.actions;
 
 export default adSlice.reducer;

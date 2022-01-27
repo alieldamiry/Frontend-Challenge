@@ -3,9 +3,16 @@ import { Box } from "@mui/system";
 import { useState } from "react";
 import ErrorOutlineOutlinedIcon from "@mui/icons-material/ErrorOutlineOutlined";
 import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
+import { useAppDispatch } from "src/redux/hooks";
+import { deleteAd } from "src/redux/slices/adsSlice";
 
-const Delete = () => {
+const Delete = ({ adId }: { adId: number }) => {
   const [open, setOpen] = useState(false);
+  const dispatch = useAppDispatch();
+
+  const handleDelete = () => {
+    dispatch(deleteAd(adId));
+  };
 
   return (
     <>
@@ -67,7 +74,7 @@ const Delete = () => {
                 Cancel
               </Button>
               <Button
-                type="submit"
+                onClick={handleDelete}
                 variant="contained"
                 color="error"
                 sx={{ m: 0.5 }}

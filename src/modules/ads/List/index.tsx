@@ -56,7 +56,7 @@ const AdsList = () => {
                 <TableCell>
                   <Box sx={{ display: "flex" }}>
                     <Edit adData={ad} />
-                    <Delete />
+                    <Delete adId={ad.id} />
                   </Box>
                 </TableCell>
               </TableRow>
